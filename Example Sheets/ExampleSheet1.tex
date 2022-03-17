@@ -1,0 +1,273 @@
+\documentclass[11pt]{article}
+\usepackage[french]{babel}
+\usepackage{amsfonts,amstext,graphicx,amsmath,amssymb,ifthen,mathrsfs,multicol}
+\usepackage[T1]{fontenc}
+
+\def\ba{\begin{eqnarray}}
+\def\ea{\end{eqnarray}}
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\O{\mathcal{O}}
+\def\H{\mathcal{H}}
+\def\hO{\hat{O}}
+\def\C{\mathcal{C}}
+\def\L{\mathcal{L}}
+\def\K{\mathcal{K}}
+\def\F{\mathcal{F}}
+\def\dd{\left|\partial d\right|}
+\def\del{\nabla}
+\def\Et{\tilde{E}}
+\def\Bt{\tilde{B}}
+\def\nn{\nonumber}
+\def\cosech{\mathrm{cosech}}
+\def\cosec{\mathrm{cosec}}
+\def\x{\mathbf{x}}
+\def\d{\mathrm{d}}
+\def\yt{\tilde{y}}
+\def\mn{_{\mu \nu}}
+\def\mupn{^\mu_{\, \nu}}
+\def\({\left(}
+\def\){\right)}
+\def\ie{{\it i.e. }}
+\def\rpm{r_\pm}
+\def\rp{r_+}
+\def\rmm{r_-}
+\def\rt{\tilde{r}_\pm}
+\def\bd{\boxdot}
+\pagestyle{empty}
+
+%============================================================
+%Macros de configuration pour la mise en forme des s\'eries.
+%Marges
+\newcommand\mydimensions{\oddsidemargin 0in \evensidemargin 0in \topmargin 0pt \textheight 230mm \textwidth 165mm}
+\def\eref#1{(\ref{#1})}
+\mydimensions
+\parskip = 0.2truecm
+\parindent = 0truecm
+%Titre avec barre
+\newcommand\Header[3]{\phantom{...}
+\vskip -2.0truecm \noindent {\obeylines Habib University \hfill Dr. Muntazir Abidi \vskip -2mm \noindent
+Dhanani School of Science and Engineering\hfill Integrated Sciences and Mathematics (iSciM) \vskip 1.5mm
+\hrule \vskip 0.5truecm}
+\begin{center} {\bf\large #1 Exercise Sheet #2} \end{center}
+\pagestyle{empty}}
+%environnement exo
+\newcommand\proclaim[2][\bf]{\medbreak\noindent{#1#2}\enspace\ignorespaces}
+\newcounter{exocomp}
+\setcounter{exocomp}{1}
+\newenvironment{exo}[1][ ]{\ifthenelse{\equal{#1}{ }}{\proclaim{Exercice \arabic{exocomp}.}}{\proclaim{Exercice \arabic{exocomp} (#1).}}\stepcounter{exocomp}\hspace*{\fill}\linebreak\parindent=0pt}{\vskip 5mm}
+%Fin des macros de mise en page.
+%============================================================
+\begin{document}
+\Header{AstroStatistics Spring 2022 \\}{1 \\ \small {Issued: 8 Feb 2022 \hspace{0.9cm} Due: 21 Feb 2022} }
+
+
+
+
+\vspace{0.5cm}
+\section{Probability}
+{\bf Exercise 1: Coin toss game (5 points)}
+
+Two people are playing a coin toss game. Player A has $n+1$ fair coins; Player B has $n$ fair cons. What is the probability that A will have more heads than B if both flip all their coins?
+
+
+
+
+{\bf Exercise 2: Birthdays: counting and simulation (15 points)}
+
+Ignoring leap days, the days of the year can be numbered 1 to 365. Assume that birthdays are equally likely to fall on any day of the year. Consider a group of n people, of which you are not a member. An element of the sample space $\Omega$ will be a sequence of n birthdays (one for each person)
+
+\begin{enumerate}
+    \item Define the probability function $P$ for $\Omega$
+    \item Consider the following events:
+    \begin{enumerate}
+        \item A: “someone in the group shares your birthday”
+        \item B: “some two people in the group share a birthday”
+        \item C: “some three people in the group share a birthday
+    \end{enumerate}
+    
+   Carefully describe the subset of $\Omega$ that corresponds to each event:
+   \item Find an exact formula for $P (A)$. What is the smallest $n$ such that $P (A) > 0.5$?
+   \item Justify why $n$ is greater than $\frac{365}{2}$ without doing any computation. (We are looking for 2
+a short answer giving a heuristic sense of why this is so.)
+\item Use R or Python (or any language you like) simulation to estimate the smallest n for which $P(B) > 0.9.$ For these simulations, let the number of trials be $10000.$
+
+For this value of $n$, repeat the simulation a few times to verify that it always gives similar results.
+
+Using $10000$ trials you saw very little variation in the estimate of $P(B)$. Try this again using 30 trials and verify that the estimated probabilities are much more variable.
+
+\item  Find an exact formula for P(B).
+
+\end{enumerate}
+
+
+
+\section{Conditional Probability and Bayes formula}
+
+{\bf Exercise 3: Unfair coin (5 points)}
+
+You are given 1000 coins. Among them, 1 coin has heads on both sides. the other 999 coins are fair coins. You randomly choose a coin and toss it 10 times. Each time, the coin turns up heads. what is the probability that the coin you choose is the unfair coin? 
+
+{\bf Exercise 4: Dice order (5 points)}
+
+
+We throw 3 dice one by one. What is the probability that we obtain 3 points in strictly increasing order?
+
+
+{\bf Exercise 5: Monty Hall problem (5 points)}
+
+Monty Hall problem is a probability puzzle based on an old American show \emph{Let's Make a Deal}. The problem is named after the show's host. Suppose you're on the show now, and you're given the choice of 3 doors. Behind one door is a car; behind the other two doors, goats. You don't know a head of time what is behind each of the doors. 
+
+You pick one of the doors and announce it. As soon as you pick the door, Monty opens one of the other two doors that he knows has a goat behind it. Then, he givens you the option to either keep your original choice or switch to the third door. Should you switch ? What is the probability of winning a car if you switch? 
+
+{\bf Exercise 6: The Base rate fallacy (5 points)}
+
+Consider a routine screening test for a disease. Suppose the frequency of the disease in the population (base rate) is 0.5\%. The test is highly accurate with a 5\% false positive rate and a 10\% false negative rate.
+You take the test and it comes back positive. What is the probability that you have the disease?
+
+
+%{\bf Exercise 7: Coin toss game 2 (5 points)}
+
+
+ 
+
+%{\bf Exercise 7: Russian roulette series (10 points)}
+
+
+
+\section{Random Variables}
+Basic properties of discrete and continuous random variables are given in the Table. 
+
+\begin{center}
+\begin{tabular}{||c |c | c||} 
+ \hline
+Random variable ($X$) & Discrete & Continuous \\ [0.5ex] 
+ \hline\hline
+ Cumulative distribution function/cdf & $F(a)=P({X\leq a})$ & $F(a) = \int_{-\infty}^{a}f(x)dx$ \\ 
+ 
+  \hline
+
+ Probability density function (pdf) & 
+ $p(x)=P({X=x})$ &  $f(x)=\frac{d}{dx}F(x)$\\
+  \hline
+
+ Expected value $E[X]$ & 
+ $\sum_{x: p(x)> 0}x p(x)$ &  $\int_{-\infty}^{\infty}xf(x)dx$\\ 
+
+\hline
+
+ Variance of $X$ (var($X$)) & 
+ $E[(X-E[X])^2]=E[X^2]-(E[X])^2$ & same  \\ 
+ 
+ \hline
+
+ Standard deviation of $X$ (std($X$)) & 
+ $\sigma=\sqrt{var(X)}$ & $\sigma=\sqrt{var(X)}$ \\
+ [1ex] 
+ \hline
+\end{tabular}
+\end{center}
+
+{\bf Exercise 7: (5 points)}
+
+Suppose X and Y are independent random variables with the probability density function (also called probability mass function in the discrete cases) given in Fig.~\ref{fig:RV}. Check that the total probability for each random variable is 1. Make a table for the random variable X + Y.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{RV.png}
+    \caption{Exercise 10}
+    \label{fig:RV}
+\end{figure}
+
+
+
+{\bf Exercise 8: Expected Value (5 points)}
+
+We roll two standard 6-sided dice. You win $\$ 1000$ if the sum is 2 and lose $\$ 100$ otherwise. How much do you expect to win on average per trial?
+
+
+{\bf Exercise 9: Discrete Distributions (15 points)}
+
+Calculate the mean, $E[X]$, and the variance, $var(X)$, of the following discrete probability density functions
+\begin{enumerate}
+    \item Uniform: 
+    \begin{equation}
+        P(x) = \frac{1}{b-a+1}, \qquad x=a, a+1, \dots, b
+    \end{equation}
+    
+    \item Binomial: 
+    \begin{equation}
+        P(x) = \begin{pmatrix}n \\x \end{pmatrix} p^x (1-p)^{n-x}, \qquad x=0,1,\dots,n
+    \end{equation}
+    
+    \item Poisson: 
+    \begin{equation}
+        P(x) = \frac{e^{-\lambda t}(\lambda t)^x}{x!}, \qquad x=0,1,\dots 
+    \end{equation}
+    %\item Geometric :
+    %\begin{equation}
+    %    P(x) = (1-p)^{x-1}p, \qquad x=1,2,\dots
+    %\end{equation}
+    
+    %\item \textbf{Negative Binomial:} 
+    %\begin{equation}
+    %    P(x) = \begin{pmatrix} x-1 \\ r-1 \end{pmatrix}p^r (1-p)^{x-r}, \qquad x=r, r+1, \dots
+   % \end{equation}
+\end{enumerate}
+
+
+These are some of the widely used discrete distributions. A discrete random variable represents the occurrence of a value between number $a$ and $b$ when all values in the set $\{a,a+1,\dots,b\}$ have equal probability. A \textbf{binomial} random variable represents the number of success in a sequence of $n$ experiments when each trial is independently a success with probability $p$. A \textbf{Poisson} random variable represents the number of events occurring in a fixed period of time with the expected number of occurrences $E[X]$ when events occur with a known average rate $\lambda$ and are independent of the time since the last chance. %A \textbf{geometric} random variable represents the trial number $n$ to get the first success when each trial is independently a success with probability $p$. \textbf{Negative Binomial} random variable represents the trial number to get to the $r$th success when each trial is independently a success with probability $p$.
+
+{\bf Exercise 10: (5 points)}
+
+
+Let X be the value of a roll of one die and let $Y = X^2$. Find $E(Y )$.
+
+
+
+
+
+\section{Optional Practice Questions\footnote{Ref: MIT }}
+
+
+\begin{enumerate}
+    \item There are 3 arrangements of the word DAD, namely DAD, ADD, and DDA. How many arrangements are there of the word PROBABILITY?
+    
+    \item Let A and B be two events. Suppose the probability that neither A or B occurs is 2/3. What is the probability that one or both occur?
+    
+    \item Let $C$ and $D$ be two events with $P(C) = 0.25$, $P(D) = 0.45$, and $P(C  \cap D) = 0.1$. What is $P(C^c \cap D)$?
+    
+    \item Suppose you are taking a multiple-choice test with c choices for each question. In answering a question on this test, the probability that you know the answer is $p$. If you don’t know the answer, you choose one at random. What is the probability that you knew the answer to a question, given that you answered it correctly?
+    \item Two dice are rolled.A = "sum of two dice equals 3". B = "sum of two dice equals 7". C = ‘at least one of the dice shows a 1’.
+    \begin{enumerate}
+        \item What is $P(A|C)$?
+        \item What is $P(B|C)$?
+        \item Are $A$ and $C$ independent? What about $B$ and $C$?
+    \end{enumerate}
+    \item Suppose that $P(A) = 0.4$, $P(B) = 0.3$ and $P((A \cup B)^C) = 0.42$. Are A and B independent?
+    
+    \item Suppose that $X$ takes values between $0$ and $1$ and has probability density function $2x$. Compute $Var(X)$ and $Var(X^2)$.
+    
+    \item Suppose 100 people all toss a hat into a box and then proceed to randomly pick out
+a hat. What is the expected number of people to get their own hat back.
+
+\item Given $N$ points drawn randomly on the circumference of a circle, what is the probability that they are all within a semicircle?
+
+\item Roll two dice and let X be the sum. Suppose the payoff function is given by $Y = X^2 - 6X + 1$. Is this a good bet?
+\item A rabbit sits at the bottom of a staircase with $n$ stairs. The rabbit can hop up only one or two stairs at a time. How many different ways are there for the rabbit to ascend to the top of the stairs?
+
+\item Two players, A and B, alternatively toss a fair coin (A tosses the coin first, then B tosses the coin, then A, then B, \dots). The sequence of heads and tails is recorded. If there is a head followed by a tail (HT sequence), the game ends, and the person who tosses the tail wins. What is the probability that A wins the game?
+
+\item  \textbf{Russian roulette series}
+
+\begin{enumerate}
+    \item \textbf{Lets play a traditional version of Russian roulette.} A single bullet is put into a 6-chamber revolver. The barrel is randomly spun so that each chamber is equally likely to be under the hammer. Two players take turns to pull the trigger -- with the gun unfortunately pointing at one's own head -- without further spinning until the gun goes off and the person who gets killed loses. If you, one of the players, can choose to go first or second, how will you choose? An what is your probability of loss? 
+    
+    
+    \item \textbf{Now, lets change the rule slightly.} We will spin the barrel again after every trigger pull. Will you choose to be the first or the second player? And what is your probability of loss? 
+\end{enumerate}
+\end{enumerate}
+
+
+NOTE: Dices are fair and have 6 sides, unless it is stated otherwise. 
+\end{document}
