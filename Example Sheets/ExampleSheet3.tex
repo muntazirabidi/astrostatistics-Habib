@@ -1,0 +1,208 @@
+\documentclass[11pt]{article}
+\usepackage[french]{babel}
+\usepackage{amsfonts,amstext,graphicx,amsmath,amssymb,ifthen,mathrsfs,multicol}
+\usepackage[T1]{fontenc}
+
+\def\ba{\begin{eqnarray}}
+\def\ea{\end{eqnarray}}
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\O{\mathcal{O}}
+\def\H{\mathcal{H}}
+\def\hO{\hat{O}}
+\def\C{\mathcal{C}}
+\def\L{\mathcal{L}}
+\def\K{\mathcal{K}}
+\def\F{\mathcal{F}}
+\def\dd{\left|\partial d\right|}
+\def\del{\nabla}
+\def\Et{\tilde{E}}
+\def\Bt{\tilde{B}}
+\def\nn{\nonumber}
+\def\cosech{\mathrm{cosech}}
+\def\cosec{\mathrm{cosec}}
+\def\x{\mathbf{x}}
+\def\d{\mathrm{d}}
+\def\yt{\tilde{y}}
+\def\mn{_{\mu \nu}}
+\def\mupn{^\mu_{\, \nu}}
+\def\({\left(}
+\def\){\right)}
+\def\ie{{\it i.e. }}
+\def\rpm{r_\pm}
+\def\rp{r_+}
+\def\rmm{r_-}
+\def\rt{\tilde{r}_\pm}
+\def\bd{\boxdot}
+\pagestyle{empty}
+
+%============================================================
+%Macros de configuration pour la mise en forme des s\'eries.
+%Marges
+\newcommand\mydimensions{\oddsidemargin 0in \evensidemargin 0in \topmargin 0pt \textheight 230mm \textwidth 165mm}
+\def\eref#1{(\ref{#1})}
+\mydimensions
+\parskip = 0.2truecm
+\parindent = 0truecm
+%Titre avec barre
+\newcommand\Header[3]{\phantom{...}
+\vskip -2.0truecm \noindent {\obeylines Habib University \hfill Dr. Muntazir Abidi \vskip -2mm \noindent
+Dhanani School of Science and Engineering\hfill Integrated Sciences and Mathematics (iSciM) \vskip 1.5mm
+\hrule \vskip 0.5truecm}
+\begin{center} {\bf\large #1 Exercise Sheet #2} \end{center}
+\pagestyle{empty}}
+%environnement exo
+\newcommand\proclaim[2][\bf]{\medbreak\noindent{#1#2}\enspace\ignorespaces}
+\newcounter{exocomp}
+\setcounter{exocomp}{1}
+\newenvironment{exo}[1][ ]{\ifthenelse{\equal{#1}{ }}{\proclaim{Exercise \arabic{exocomp}.}}{\proclaim{Exercise \arabic{exocomp} (#1).}}\stepcounter{exocomp}\hspace*{\fill}\linebreak\parindent=0pt}{\vskip 5mm}
+%Fin des macros de mise en page.
+%============================================================
+\begin{document}
+\Header{AstroStatistics Spring 2022 \\}{3 \\ \small {Issued: 30 March 2022 \hspace{0.9cm} Due: 14 April 2022} }
+
+
+Useful Notes: 
+
+\begin{itemize}
+    \item \textbf{Unbiased estimators:} An estimator of a parameter $\theta$ is a function $T = T (X)$ which we use to estimate $\theta$ from an observation of $X$. $T$ is said to be unbiased if
+    \begin{equation}
+        \mathrm{E}(T) = \theta
+    \end{equation}
+    
+    \item \textbf{Maximum likelihood estimation:} Suppose that the random variable $X$ has probability density function $f(x| θ)$. Given the observed value $x$ of $X$, the likelihood of $\theta$ is defined by
+    \begin{equation}
+        \mathcal{L}(\theta) = f(x|\theta)
+    \end{equation}
+    Thus we are considering the density as a function of $\theta$, for a fixed $x$. In the case of multiple observations we write the likelihood function as 
+    \begin{equation}
+        \mathcal{L}(\theta) = f(x_1, \dots, x_n | \theta) = \prod^{n}_{i=1}f(x_i| \theta)
+    \end{equation}
+    Thus the maximum likelihood estimate $\hat{\theta}(x)$ of $\theta$ is defined as the value of $\theta$ that maximizes the likelihood; we call it the maximum likelihood estimator (MLE) of $\theta$.\\
+    
+ 
+    \item \textbf{Sufficient statistics:} If MLE exists is always a function of the sufficient statistics. The sufficient statistics summarises all information which is relevant to do inference about $\theta$. It is important to know the following theorem called the factorization criterion:\\
+    
+    \textbf{Theorem: } \emph{The statistics $T$ is sufficient for $\theta$ if and only if $f(x | \theta)$ can be expressed as }
+    \begin{equation}
+        f(x | \theta) = g(T(X), \theta)h(x).
+    \end{equation}
+\end{itemize}
+
+\vspace{0.5cm}
+\section*{Problem 1}
+Gaussian 1D problem. The surface temperature on Mars is measured by a probe 10 times, yielding the following data (units of K):
+\begin{equation}
+    \text{Data}: \{191.9,\quad 201.6,\quad 206.1,\quad 200.4,\quad 203.2,\quad 201.6,\quad 196.5,\quad 199.5,\quad 194.1,\quad 202.4\}
+\end{equation}
+\begin{enumerate}
+    \item Assume that each measurement is independently Normally distributed with known variance $\sigma^2 = 25$ K2. What is the likelihood function for the whole data set?
+    
+    \item Find the Maximum Likelihood Estimate (MLE) for the surface temperature, $\hat{T}_{\text{ML}}$, and express your result to 4 significant figures accuracy.
+    
+    \item Determine symmetric confidence intervals at $68.3\%$, $95.4\%$, and $99\%$ around $\hat{T}_{\text{ML}}$ (4 significant figures accuracy)
+    \item How many measurements would you need to make if you wanted to have a $1\sigma$ confidence interval around the mean of length less than 1 K (on each side)?
+\end{enumerate}
+
+\section*{Problem 2}
+You flip a coin $n = 10$ times and you obtain $8$ heads.
+
+\begin{enumerate}
+    \item What is the likelihood function for this measurement? Identify explicitly what are the data and what is the free parameter you are trying to estimate.
+    
+    \item What is the Maximum Likelihood Estimate for the probability of obtaining heads in one flip, $p$?
+    
+    \item Approximate the likelihood function as a Gaussian around its peak and derive the $1\sigma$ confidence interval for $p$. How would you report your result for $p$?
+    
+    \item With how many $\sigma$ confidence can you exclude the hypothesis that the coin is fair? (\emph{Hint: compute the distance between the MLE for $p$ and $p = 1/2$ and
+express the result in number of $\sigma$}).
+
+    \item You now flip the coin $1000$ times and obtain $800$ heads. What is the MLE for $p$ now and what is the $1\sigma$ confidence interval for $p$? With how many $\sigma$ confidence can you exclude the hypothesis that the coin is fair now?
+\end{enumerate}
+
+\section*{Problem 3}
+An experiment counting particles emitted by a radioactive decay measures $r$ particles per unit time interval. The counts are Poisson distributed.
+\begin{enumerate}
+    \item If $\lambda$ is the average number of counts per per unit time interval, write down the appropriate probability distribution function for $r$.
+    
+    \item Now we seek to determine $\lambda$ by repeatedly measuring for $M$ times the number
+of counts per unit time interval. This series of measurements yields a sequence of counts $r = {\hat{r}_1, \hat{r}_2, \hat{r}_3, \dots, \hat{r}_M}$. Each measurement is assumed to be independent. Derive the joint likelihood function for $\lambda$, $\mathcal{L} (\lambda) = P(\hat{r}|\lambda)$, given the measured sequence of counts $\hat{r}$
+
+\item Use the Maximum Likelihood Principle applied to the the log likelihood $\ln \mathcal{L} (\lambda)$ to show that the Maximum Likelihood estimator for the average rate
+ $\lambda$ is just the average of the measured counts, $\hat{r}$, i.e
+ \begin{equation}
+     \hat{\lambda}_{\text{ML}} = \frac{1}{M}\sum_{i=1}^{M}\hat{r}_i
+\end{equation}  
+\item By considering the Taylor expansion of $\ln \mathcal{L} (\lambda)$ to second order around $\hat{\lambda}_{\text{ML}}$,
+derive the Gaussian approximation for the likelihood $\mathcal{L} (\lambda)$ around the Maximum Likelihood point, and show that it can be written as
+\begin{equation}
+    \mathcal{L}(\lambda) \approx L_0\exp\Big(-\frac{1}{2}\frac{M}{\hat{\lambda}_{\text{ML}}}(\lambda -\hat{\lambda}_{\text{ML}})^2\Big)
+\end{equation}
+where $L_0$ is a normalisation constant.
+
+\item Compare with the equivalent expression for $M$ Gaussian-distributed measurements to show that the variance $\sigma^2$ of the Poisson distribution is given by $\sigma^2 = \lambda$.
+ 
+\end{enumerate}
+
+\section*{Problem 4}
+Suppose you measure the flux $F$ of photons from a laser source using 4 different instruments and you obtain the following results (units of 104 photons/cm$^2$):
+\begin{equation}
+    \text{Data: } \{34.7\pm5.0,\quad 28.9\pm2.0,\quad 27.1\pm3.0,\quad 30.6\pm4.0.\}
+\end{equation}
+\begin{enumerate}
+
+\item Write down the likelihood for each measurement, and explain why a Gaussian approximation is justified in this case
+
+\item Write down the joint likelihood for the combination of the 4 measurements.
+
+\item Find the MLE of the photon flux, $\hat{F}_{\text{ML}}$, and show that it is given by:
+\begin{equation}
+    \hat{F}_{\text{ML}} = \sum_{i}\frac{\hat{n}_i}{\hat{\sigma}_i^2/\bar{\sigma}^2}
+\end{equation}
+where 
+\begin{equation}
+    \frac{1}{\bar{\sigma}^2}\equiv \sum_{i}\frac{1}{\hat{\sigma}^2_i}
+\end{equation}
+\item Compute $\hat{F}_{\text{ML}}$ from the data above and compare it with the sample mean.
+
+\item Find the $1\sigma$ confidence interval for your MLE for the mean, and show that it is given by:
+
+\begin{equation}
+    \Bigg(\sum_i \frac{1}{\hat{\sigma}^2_i}\Bigg)^{-1/2}
+\end{equation}
+Evaluate the confidence interval for the above data. How would you summarize your measurement of the flux $F$?
+
+\end{enumerate}
+
+%\section*{Problem 5}
+%Let the random variables drawn from the normal distribution: $X_1, X_2, \dots, X_n \sim N(\mu, \sigma^2)$. The parameters are $\theta = (\mu, \sigma^2)$, where $\mu$ and $\sigma$ are the mean and the standard deviation of the normal distribution to be estimated from the data. Using the factorization criterion discussed in the lecture, find the sufficient statistics for $\theta = (\mu, \sigma^2)$.
+
+%Note that the sufficient statistics is not just a single number but can be a vector as in this case. This usually occurs when the parameter is a vector, $\theta = (\mu, \sigma^2)$. 
+
+\section*{Problem 5} Suppose $X_1, X_2, \dots, X_n \sim N(\mu, \sigma^2)$, where $\mu$ and $\sigma^2$ are unknown and the be estimated from the data. 
+
+\begin{enumerate}
+    \item Find the maximum likelihood estimator (MLE) for $\mu$ and $\sigma$. The MLEs are defined as $\hat{\mu}_{\text{ML}}$ and $\hat{\sigma}^2_{\text{ML}}$
+    
+    \item Show that $\hat{\mu}_{\text{ML}}$ is unbiased but $\hat{\sigma}^2_{\text{ML}}$ is not unbiased. Find the unbiased estimator for the variance.
+    
+    \item Can you give an example of the estimator of the variance which is neither the MLE nor unbiased? (Hint: \emph{the estimator which minimizes the mean squared error. more Hint: estimator of the form $\lambda \sum^{n}_{i=1} (X_i - \bar{X})^2$}, for what value of $\lambda$ it is neither the MLE nor unbiased.)
+\end{enumerate}
+
+\section*{Problem 6}
+In each of cases (a)–(c) write down the likelihood of $\theta$ and show that the stated $T(X)$ is a sufficient statistic for $\theta$.
+
+In each case also find a MLE of $\theta$ and show that it is a function of $T(X)$. Find the distribution of $T(X)$ and determine whether or not the MLE is an unbiased estimator of $\theta$. If it is not, verify that it is asymptotically unbiased, and find some other estimator which is unbiased.
+\begin{enumerate}
+    \item $X_1, \dots, X_n$ are independent Poisson random variables, with $X_i$ having mean $i\theta$, where $\theta > 0$. $T(X) = \sum_{i=1}^n X_i$.
+    
+    \item $X_1, \dots, X_n$ are independent normal random variables, with $X_i \sim N(\theta, \sigma_i^2)$, and $\sigma^2_i, i=1, \dots, n$, known. $T(X) = \sum_{i=1}^n X_i/\sigma^2_i$.
+    
+    \item $X_1, \dots, X_n$ are $n>2$ independent and exponentially distributed random variables, with parameter $\theta$, i.e., with density $f(x | \theta) = \theta e^{-\theta x}, x > 0$. $T(X)=\sum_{i=1}^nX_i$
+\end{enumerate}
+
+
+\newline
+Hint: \emph{In case (a), $T(X) \sim P(\frac{1}{2}n(n+1)\theta)$. In case (b), $T(X) \sim N(\theta \sum_i \sigma_i^{-2}, \sum_i \sigma_i^{-2})$. In case (c), $T(X) \sim gamma(n,\theta)$. Do you understand why? }
+
+\end{document}
